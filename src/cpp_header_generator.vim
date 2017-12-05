@@ -6,16 +6,22 @@
 " License : MIT
 
 function Cpp_print_header_guard_skeleton()
-	let header_guard_name = "HEADER_HPP"
-	let str_header_guard = ["#ifndef " . header_guard_name,
-		\"#define " . header_guard_name . " 1",
+	let l:header_guard_name = "HEADER_" . expand('%:t') . "_"
+	let l:header_guard_name = toupper(l:header_guard_name)
+	let l:header_guard_name = substitute(l:header_guard_name, "\\.", "_", "g")
+	let l:str_header_guard = ["#ifndef " . l:header_guard_name,
+		\"#define " . l:header_guard_name . " (1)",
 		\"",
-		\"#endif /* " . header_guard_name . " */"]
-	call setline(line("$"), str_header_guard)
+		\"",
+		\"",
+		\"#endif /* " . l:header_guard_name . " */"]
+	call setline(line("$"), l:str_header_guard)
 
 	" Hihglights header guard name so that it could be substituted easily.
-	call search(header_guard_name)
-	call matchadd("Search", header_guard_name)
+	call search(l:header_guard_name)
+	call matchadd("Search", l:header_guard_name)
+	normal 4gg
+	startinsert
 endfunction
 
 command CppNewHeader :call Cpp_print_header_guard_skeleton()
