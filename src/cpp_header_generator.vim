@@ -8,9 +8,9 @@
 function Cpp_print_header_guard_skeleton()
 	let l:header_guard_name = "HEADER_" . expand('%:t') . "_"
 	let l:header_guard_name = toupper(l:header_guard_name)
-	let l:header_guard_name = substitute(l:header_guard_name, "\\.", "_", "g")
+	let l:header_guard_name = substitute(l:header_guard_name, "\\(\\.\\|-\\)", "_", "g")
 	let l:str_header_guard = ["#ifndef " . l:header_guard_name,
-		\"#define " . l:header_guard_name . " (1)",
+		\"#define " . l:header_guard_name,
 		\"",
 		\"",
 		\"",
