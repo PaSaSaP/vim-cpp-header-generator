@@ -5,6 +5,11 @@
 " Maintainer : Povilas Balciunas<balciunas90@gmail.com>
 " License : MIT
 
+if exists("g:loaded_cpp_header_generator_plugin")
+    finish
+endif
+let g:loaded_cpp_header_generator_plugin = 1
+
 function Cpp_print_header_guard_skeleton()
 	let l:header_guard_name = "HEADER_" . expand('%:t') . "_"
 	let l:header_guard_name = toupper(l:header_guard_name)
